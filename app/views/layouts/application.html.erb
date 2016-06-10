@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fynp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <!-- <% if user_signed_in? %>
+
+  <li><%= link_to 'Home', root_path%></li>
+  <li><%= link_to 'About us',home_about_path %></li>
+  <li><%= link_to 'Contact', home_contact_path%></li>
+  <li><%= link_to 'Cart', products_transaction_path%></li>
+  <li style="float: right"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+  <%else%>
+  <% end %> -->
+  <%= render 'layouts/header'%>
+  <div class="container">
+    <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>">
+      <a href="#" data-dismiss="alert" class="close">×</a>
+      <ul>
+        <li>
+          <%= value %>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+  </div>
+
+        <%= yield %>
+  <%= render 'layouts/footer'%>
+</body>
+</html>

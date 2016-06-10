@@ -1,0 +1,86 @@
+ <div class="container page-content">
+            <div class="row">
+                <div class="span8">
+                    <div class="box-container">
+                        <div class="cycle-slideshow"
+                          data-cycle-fx=fade
+                          data-cycle-timeout=0,alt:
+                          data-cycle-swipe=true
+                          data-cycle-pager="#adv-custom-pager"
+                          data-cycle-pager-template='<a href="#" ><img src="{{src}}"></a>'
+                          data-cycle-prev="#prev"
+                          data-cycle-next="#next"
+                        >
+                          <%= image_tag @product.image,alt:'image',class: 'media-object' %>
+
+
+                        </div><!-- .cycle-slideshow -->
+                        <div id="adv-custom-pager"></div>
+                        <div class="clearfix">
+                            <div class="clearfix padding30">
+                                <h2 class="prop-title pull-left margin0"><%=@product.title%></h2>
+                              <span class="prop-price pull-right serif italic">
+                                <% if @product.highest_bid %>
+                                  <h5>Current highest bid: <%=@product.highest_bid %></h5>
+                              <%else%>
+                              <h5>Minimum bid:<%= @product.minimum_bid %></h5>
+                              <%end%>
+                              </span>
+                            </div>
+                            <div class="clearfix padding030 row-fluid">
+                                <ul class="more-info pull-left span6">
+                                    <li class="info-label clearfix"><span class="pull-left">Bidding on <%=@product.title%> ends at:</span>
+                                        <span class="qty pull-right"><%= @product.end_time%></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="clearfix padding30">
+                                <h3><%=@product.title%> Description</h3>
+                                <p>
+                                	<%= @product.description%>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- .span8 -->
+                <div class="span4">
+                    <div class="widget map box-container padding30">
+                        <h3 class="widget-title">Map &amp; Directions</h3>
+                        <iframe src="http://maps.google.it/maps?f=q&amp;source=s_q&amp;hl=it&amp;geocode=&amp;q=miami+beach+collins+ave+1220&amp;aq=&amp;sll=25.861386,-80.120888&amp;sspn=0.205136,0.347786&amp;ie=UTF8&amp;hq=&amp;hnear=1220+Collins+Ave,+Miami+Beach,+Miami-Dade,+Florida+33139,+Stati+Uniti&amp;t=m&amp;z=14&amp;ll=25.783255,-80.131265&amp;output=embed"></iframe>
+                    </div>
+                    <div class="agent-box widget box-container clearfix padding30">
+                        <div class="">
+                            <div class="pull-left">
+                                <img alt="image" class="media-object agent-avatar" src="images/agent-01.jpg">
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- .agent-box -->
+
+                    <!-- .search-form -->
+                </div>
+                <!-- .span4 -->
+            </div>
+            <!-- .row -->
+        </div>
+        <!-- .container -->
+        <div class="container">
+            <div class="row">
+                <div class="span12 box-container">
+                    <div class="row adv-message clearfix">
+                        <div class="pull-left span7">
+                            <p class="upper-line serif italic">Online Auctioning is the best solution to
+                            the buying of products which are legitimate...We are fidelity, you have our word</p>
+                            <p class="lower-line">You have got it because we had it, if we didn't we would get it just to make sure that you could have if even if you didn't want it.</p>
+                        </div>
+                        <!-- .pull-left -->
+                        <a><%= link_to "Bid Now", new_product_bid_path(@product), class: "pull-right btn btn-large btn-realto span3" %></a>
+                        <!-- <a class="pull-right btn btn-large btn-realto span3" href="#" title="Buy It Now">Buy
+                            It Now!</a> -->
+                    </div>
+                    <!-- .adv-message  -->
+                </div>
+            </div>
+        </div>

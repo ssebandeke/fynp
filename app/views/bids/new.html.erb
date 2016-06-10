@@ -1,0 +1,29 @@
+
+<div class="container page-content">
+    <div class="row">
+        <div class="span12">
+            <div class="box-container">
+                <div class="padding30">
+                    <h2 class="page-title">Bid</h2>
+                    <% if @product.highest_bid %>
+                      <h4><%= "Current highest bid is #{@product.highest_bid}" %></h4>
+                    <%else%>
+                    <h4>Minimum bid is:<%= @product.minimum_bid%></h4>
+                    <% end %>
+
+                    <%= form_for @bid, :url => product_bids_path(@product) do |f| %>
+
+                      <div>
+                      <%= f.label :amount %>
+                      <%= f.text_field :amount %>
+                      </div>
+                      <%= f.submit %>
+
+                    <% end %>
+                  </div>
+                </div>
+                <%=link_to "back",root_path,class: "btn span2 btn-realto-form btn-large"%>
+
+              </div>
+            </div>
+          </div>

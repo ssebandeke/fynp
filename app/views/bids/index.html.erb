@@ -1,0 +1,12 @@
+<h2><%= link_to @product.title, @product %></h2>
+<p><%= @product.description %></p>
+
+<% @bids.each do |bid| %>
+  <% if bid.bidder %>
+    <div>
+      <%= bid.bidder.email %> bid
+      <%= number_to_currency(bid.amount/100) %> at
+    </div>
+  <% end %>
+<% end %>
+<%= link_to 'New Bid', new_bid_path %>

@@ -1,0 +1,67 @@
+<!-- begin header -->
+<header>
+  <div class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <button class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse" type="button">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <% if user_signed_in? %>
+
+            <li>
+              <%= link_to root_path do %>
+              <i class="icon-home"></i>
+              <%end%>
+            </li>
+              <li><%= link_to 'About Us',home_about_path %></li>
+              <li><%= link_to 'Contact Us', home_contact_path%></li>
+              <li><%= link_to 'Cart', products_transaction_path%></li>
+            <% else %>
+            <li>
+              <%= link_to root_path do %>
+              <i class="icon-home"></i>
+              <%end%>
+            </li>
+            <li><%= link_to 'About Us',home_about_path %></li>
+            <li><%= link_to 'Contact Us', home_contact_path%></li>
+            <% end %>
+
+
+
+          </ul>
+        </div>
+        <!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
+  <div id="logo-container">
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+          <span class="logo-text"><%= link_to "Online Auctioning System",root_path, class: "brand"%></span>
+
+          <span class="tag-line hidden-phone">We have it,because you need it</span>
+        </div>
+        <div class="span4">
+
+          <ul class="inline pull-right">
+          <% if user_signed_in? %>
+            <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+            <li><%=current_user.fname %>
+          <% else %>
+            <li><%= link_to 'Sign Up',new_user_registration_path%></li>
+            <li><%= link_to 'Sign In',new_user_session_path%></li>
+          <%end%>
+          </ul>
+
+          <!-- <div class="phone-number pull-right"><i class="icon-phone"></i> Call Us: <strong>+256-701-706133</strong></div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- #logo-container -->
+</header>
