@@ -17,7 +17,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
+gem 'faker'
+gem 'axlsx_rails'
 gem 'devise'
 gem 'therubyracer'
 gem 'less-rails'

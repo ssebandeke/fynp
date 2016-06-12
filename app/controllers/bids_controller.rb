@@ -18,12 +18,13 @@ class BidsController < ApplicationController
 
   def create
     @product = Product.find(params[:product_id])
-    @bid = Bid.new(bid_params)
+    @bid = @product.bids.create(bid_params)
+    # @bid = Bid.new(bid_params)
     @bid.bidder = current_user
     @bid.product = @product
-    if not_user_own_the_auction?
+    if not_user_own_the_product?
       if @bid.save
-        UserMailer.welcome_email(@product.seller).deliver
+        BidsMailer.bid_created(current_user,@product.seller,@bid.amount).deliver
         redirect_to @product, :notice => "You are the current high bidder"
       else
         flash[:error] = @bid.errors.full_messages
@@ -40,7 +41,7 @@ class BidsController < ApplicationController
   def bid_params
     params.require(:bid).permit(:amount)
   end
-  def not_user_own_the_auction?
+  def not_user_own_the_product?
     @bid.product.seller != current_user
 
   end

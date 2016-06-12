@@ -1,0 +1,56 @@
+
+<div class="container page-content">
+    <div class="row">
+        <div class="span12">
+            <div class="row">
+              <% if @products.blank? %>
+              <h3>Couldnt find any product with the search criteria you used</h3>
+              <%else%>
+              <%@products.each do |product|%>
+                <div class="span4 box-container">
+                    <div class="holder">
+                        <a class="overlay" href="#" title="property title">
+                            <span class="more"></span>
+                            <%=link_to image_tag(product.image,class: 'media-object',alt: 'image'),product %>
+                            <!-- <img alt="image" class="media-object" src="http://placehold.it/370x210"> -->
+                        </a>
+                        <span class="prop-tag">For Sale</span>
+                        <div class="prop-info">
+                            <h3 class="prop-title"><%=link_to product.title,product%></h3>
+                            <ul class="more-info clearfix">
+                                <li class="info-label clearfix"><span class="pull-left">Bidding starts on:</span>
+                                    <span class="qty pull-right"><%= product.start_time%></span></li>
+                                <li class="info-label clearfix"><span class="pull-left">Bidding ends on:</span>
+                                    <span class="qty pull-right"><%=product.end_time%></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <%end%>
+              <%end%>
+                <!-- .span4 .box-container -->
+
+            </div>
+            <!-- .row -->
+        </div>
+        <!-- .span12 -->
+    </div>
+    <!-- .row -->
+</div>
+<!-- .container -->
+<div class="container">
+    <div class="row">
+        <div class="span12 box-container">
+            <div class="row adv-message clearfix">
+                <div class="pull-left span7">
+                  <p class="upper-line serif italic">Online Auctioning is the best solution to
+                  the buying of products which are legitimate...We are fidelity, you have our word</p>
+                  <p class="lower-line">You have got it because we had it, if we didn't we would get it just to make sure that you could have if even if you didn't want it.</p>
+                </div>
+                <!-- .pull-left -->
+                <a><%=link_to "Back",root_path, class: "pull-right btn btn-large btn-realto span3"%></a>
+            </div>
+            <!-- .adv-message  -->
+        </div>
+    </div>
+</div>

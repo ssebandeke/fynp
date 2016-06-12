@@ -4,6 +4,12 @@ class ProductsController < ApplicationController
   # def index
   #   @products = Product.all
   # end
+  def search
+    @products = Product.search(params)
+  end
+  def comings
+    @products = Product.get_coming_products
+  end
   def index
     @products = Product.get_active_products
   end
@@ -13,9 +19,11 @@ class ProductsController < ApplicationController
   end
 
   def create
+    @user = current_user
     @product = Product.new(product_params)
     @product.seller = current_user
     if @product.save
+      BidMailer.product_created(@user).deliver
       redirect_to root_path
 
     else
@@ -27,6 +35,30 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @current_bidder = @product.highest_bidder
+  end
+  def edit
+   @product = Product.find(params[:id])
+     flash[:notice] = "Product has ended, sorry!" if @product.closed?
+     render :edit
+ end
+
+ def update
+   @product = Product.find(params[:id])
+     if @product.update(product_params)
+       flash[:notice] = "Product successfully updated"
+       redirect_to @product
+     else
+       flash[:error] = @product.errors.full_messages
+       render :edit
+     end
+ end
+ def destroy
+    @product = Product.find(params[:id])
+      if @product.destroy
+        redirect_to products_path, notice: "Successfully deleted product. Sorry we're not sorry."
+      else
+        render 'edit'
+      end
   end
 
   def end_product
@@ -45,7 +77,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:title, :description,:end_time,:minimum_bid,:image,:start_time,:paid_at,:seller_id)
+    params.require(:product).permit(:title, :description,:end_time,:minimum_bid,:image,:category_id,:start_time,:paid_at,:seller_id)
   end
 
 

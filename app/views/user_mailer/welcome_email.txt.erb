@@ -1,5 +1,4 @@
-welcome to Online Auctioning System,<%= @user.name%>
-===============================================================
-you have successfully signed with us your username is <%= user.login%>
-To log inti the site,just follow the link <%= @url%>
-We wish you well
+Notification
+===============================================
+A new bid was placed on <%= @product.title%>: of <%=@product.highest_bid%> by <%=@product.highest_bidder%>
+you check it out on <%=product_url(@product)%>

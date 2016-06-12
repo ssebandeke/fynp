@@ -6,6 +6,7 @@ class Bid < ActiveRecord::Base
   validate :higher_than_current?
   validate :higher_than_minimum_bid?
   validates :amount, :numericality => true
+  validate :equal_to_current_bid
 
   # def convert_bid_to_cents
   #   self.amount = (self.amount*100).to_i
@@ -18,6 +19,9 @@ class Bid < ActiveRecord::Base
   # def amount_in_cents
   #   self.amount*100
   # end
+  def equal_to_current_bid
+
+  end
   def higher_than_minimum_bid?
     if self.amount <= product.minimum_bid
       errors.add(:amount,"too low cant be lower than minimum bid")

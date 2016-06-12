@@ -20,11 +20,14 @@
                             <div class="clearfix padding30">
                                 <h2 class="prop-title pull-left margin0"><%=@product.title%></h2>
                               <span class="prop-price pull-right serif italic">
+
                                 <% if @product.highest_bid %>
-                                  <h5>Current highest bid: <%=@product.highest_bid %></h5>
+                                  <h5>Current highest bid: <%=@product.highest_bid %></h5><br/>
+
                               <%else%>
                               <h5>Minimum bid:<%= @product.minimum_bid %></h5>
                               <%end%>
+
                               </span>
                             </div>
                             <div class="clearfix padding030 row-fluid">
@@ -32,10 +35,15 @@
                                     <li class="info-label clearfix"><span class="pull-left">Bidding on <%=@product.title%> ends at:</span>
                                         <span class="qty pull-right"><%= @product.end_time%></span>
                                     </li>
+                                    <li class="info-label clearfix">
+                                      <span class="pull-left">Category:</span>
+                                      <span class="qty pull-right"><%= @product.category.name%></span>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="clearfix padding30">
                                 <h3><%=@product.title%> Description</h3>
+
                                 <p>
                                 	<%= @product.description%>
                                 </p>
@@ -52,9 +60,19 @@
                     <div class="agent-box widget box-container clearfix padding30">
                         <div class="">
                             <div class="pull-left">
-                                <img alt="image" class="media-object agent-avatar" src="images/agent-01.jpg">
+                              <% if can? :update, @product%>
+                                <a><%=link_to "Edit Product",edit_product_path(@product)%></a>
+                              <%end%> <br/>
+                              <%if can? :destroy, @product%>
+                                <a><%= link_to "Delete Product",@product,method: :delete,data: {confirm: "Are you sure?"}%></a>
+                              <%end%>
+                              <% if @product.start_time > Time.now %>
+                              <p>
+                                Bidding on this product has not yet started...it will commence on <%=@product.start_time%>
+                              </p>
+                              <%end%>
                             </div>
-                            
+
                         </div>
                     </div>
                     <!-- .agent-box -->
@@ -76,7 +94,13 @@
                             <p class="lower-line">You have got it because we had it, if we didn't we would get it just to make sure that you could have if even if you didn't want it.</p>
                         </div>
                         <!-- .pull-left -->
-                        <a><%= link_to "Bid Now", new_product_bid_path(@product), class: "pull-right btn btn-large btn-realto span3" %></a>
+                        <%if @product.start_time > Time.now %>
+
+                          <a><%=link_to "Back",root_path, class: "pull-right btn btn-large btn-realto span3"%></a>
+                        <%else%>
+                          <a><%= link_to "Bid Now", new_product_bid_path(@product), class: "pull-right btn btn-large btn-realto span3" %></a>
+                        <%end%>
+                        <!-- <a><%= link_to "Bid Now", new_product_bid_path(@product), class: "pull-right btn btn-large btn-realto span3" %></a> -->
                         <!-- <a class="pull-right btn btn-large btn-realto span3" href="#" title="Buy It Now">Buy
                             It Now!</a> -->
                     </div>

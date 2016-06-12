@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+
   get 'home/about'
   get 'home/contact'
   get 'home/help'
@@ -8,12 +10,16 @@ Rails.application.routes.draw do
   get 'home/solo'
 
   get 'products/transaction'
+  get 'products/comings'
   get 'bids/create'
   root 'products#index'
   get 'orders/express_new'
   resources :orders,:new => {:express => :get}
   resources :products do
     resources :bids
+    collection do
+      get 'search'
+    end
   end
   devise_for :users
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

@@ -26,6 +26,9 @@ class Product < ActiveRecord::Base
     # end
 
   end
+  def self.get_coming_products
+    where("start_time > ?",Time.now)
+  end
   def end_time_after_start_time
     return unless start_time && end_time
 
@@ -52,13 +55,18 @@ class Product < ActiveRecord::Base
     where("end_time < ?", Time.now)
   end
   def self.get_active_products
-    where("end_time > ?", Time.now)
+    where("start_time < ?", Time.now)
   end
   def closed?
     self.end_time < Time.now
   end
   def paypal_url(return_url)
 
+  end
+  def self.search(params)
+    products = Product.where(category_id: params[:category].to_i)
+    # products = products.where("title like ?","%#{params[:search]}%") if params[:search].present?
+    products
   end
 
 end
