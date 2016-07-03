@@ -24,7 +24,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.raise_delivery_errors = false
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -57,6 +57,9 @@ Rails.application.configure do
   #     password:  ENV["GMAIL_PASSWORD"]
   # }
   config.action_mailer.default_url_options = { host: 'localhost:3000'}
+  # config.stripe.secret_key = 'sk_test_quNXHTTU8jhGhYMr35PQvQlq'
+  # config.stripe.publishable_key = ' pk_test_pJZwPSps0bDJ7o594v3IX779'
+  # config.stripe.eager_load = ['user']
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

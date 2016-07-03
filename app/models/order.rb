@@ -1,3 +1,6 @@
+require "active_merchant/billing/rails"
+require "rubygems"
+require "active_merchant"
 class Order < ActiveRecord::Base
   belongs_to :product
   has_many :transactions, :class_name => "OrderTransaction"
@@ -5,8 +8,8 @@ class Order < ActiveRecord::Base
   validate :validate_card, :on => :create
 
   def purchase
-    response = GATEWAY.purchase(price_in_cents,credit_card,:ip => ip_address)
-    transactions.create!(:action => "purchase", :amount => price_in_cents,:response => response)
+    response = GATEWAY.purchase(1000,credit_card,:ip => ip_address)
+    transactions.create!(:action => "purchase", :amount => 1000,:response => response)
     product.update_attribute(:paid_at,Time.now) if response.success?
     response.success?
 

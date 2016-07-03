@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
     protected
 
     def configure_permitted_parameters
+      devise_parameter_sanitizer.for(:sign_up) << :terms
       devise_parameter_sanitizer.for(:sign_up) << :lname
       devise_parameter_sanitizer.for(:sign_up) << :fname
       devise_parameter_sanitizer.for(:sign_up) << :date_of_birth

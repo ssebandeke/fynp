@@ -132,7 +132,7 @@ iframe {
 .margin300 {
 	margin: 30px 0;
 }
-.page-title, 
+.page-title,
 .post-title,
 .secion-title,
 .info-head,
@@ -185,7 +185,7 @@ a.brand {
 	background: #353535;
 	border: none;
 }
-.navbar-fixed-top .navbar-inner, 
+.navbar-fixed-top .navbar-inner,
 .navbar-static-top .navbar-inner {
 	box-shadow: none;
 }
@@ -308,7 +308,7 @@ a.brand {
 }
 .more-info > li {
 	border-bottom: 1px dashed #E9E9E9;
-    padding: 5px 0;	
+    padding: 5px 0;
 }
 .more-info .info-label {
     font-weight: bold;
@@ -634,7 +634,7 @@ ul.media-list li.media div.comment-holder {
 	color: #363636;
 	border: none;
 }
-.nav-tabs > .active > a, 
+.nav-tabs > .active > a,
 .nav-tabs > .active > a:hover,
 .nav-tabs {
 	border: none;
@@ -773,13 +773,13 @@ h2.post-title {
 @media (min-width: 768px) and (max-width: 979px) {
 	.agent-box.widget h3, .agent-box.widget ul {
 	    margin: 30px 0 0;
-	}	
+	}
 	.nav-collapse .open > .dropdown-menu,
 	.nav-collapse .dropdown-menu {
 		margin: 0;
 		background: #fff;
 	}
-	.nav-collapse .nav > li > a, 
+	.nav-collapse .nav > li > a,
 	.nav-collapse .dropdown-menu a {
 		border-radius: 0;
 		border-right: none;
@@ -805,7 +805,7 @@ h2.post-title {
 /* ==========================================================
 ! Landscape phone to portrait tablet
 ========================================================== */
-@media (max-width: 767px) { 
+@media (max-width: 767px) {
 	header {
 		margin-left: -20px;
 		margin-right: -20px;
@@ -861,7 +861,7 @@ h2.post-title {
 	.dropdown.open .dropdown-menu {
 		background: #FFF;
 	}
-	.nav-collapse .nav > li > a, 
+	.nav-collapse .nav > li > a,
 	.nav-collapse .dropdown-menu a {
 		border-radius: 0;
 		border-right: none;
@@ -884,5 +884,5 @@ h2.post-title {
 	.agent-box.widget h3, .agent-box.widget ul {
 	    margin: 30px 0 0;
 	}
-		
+
 }

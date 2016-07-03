@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160611061032) do
+ActiveRecord::Schema.define(version: 20160703160542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,9 +36,20 @@ ActiveRecord::Schema.define(version: 20160611061032) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "products_count", default: 0
+  end
+
+  create_table "charges", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "charges", ["product_id"], name: "index_charges_on_product_id", using: :btree
+  add_index "charges", ["user_id"], name: "index_charges_on_user_id", using: :btree
 
   create_table "line_items", force: :cascade do |t|
     t.decimal  "unit_price"
@@ -73,17 +84,18 @@ ActiveRecord::Schema.define(version: 20160611061032) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.string   "title",       null: false
-    t.text     "description", null: false
-    t.datetime "end_time",    null: false
-    t.integer  "minimum_bid", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "title",                   null: false
+    t.text     "description",             null: false
+    t.datetime "end_time",                null: false
+    t.integer  "minimum_bid",             null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.datetime "paid_at"
     t.string   "image"
     t.string   "seller_id"
     t.datetime "start_time"
     t.integer  "category_id"
+    t.integer  "bids_count",  default: 0
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
@@ -113,4 +125,6 @@ ActiveRecord::Schema.define(version: 20160611061032) do
 
   add_foreign_key "bids", "products"
   add_foreign_key "bids", "users"
+  add_foreign_key "charges", "products"
+  add_foreign_key "charges", "users"
 end

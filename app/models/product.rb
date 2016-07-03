@@ -2,8 +2,9 @@ class Product < ActiveRecord::Base
   has_many :bids
   has_one :order
   has_many :bids, :dependent => :destroy
+  has_one :charge
   belongs_to :seller, :class_name => "User"
-  belongs_to :category
+  belongs_to :category,counter_cache: true
   validates :title, presence: true
   validates :description, presence: true
   validates :seller_id,presence: true
@@ -68,5 +69,6 @@ class Product < ActiveRecord::Base
     # products = products.where("title like ?","%#{params[:search]}%") if params[:search].present?
     products
   end
+
 
 end

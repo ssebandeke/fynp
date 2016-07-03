@@ -1,8 +1,11 @@
 class UserMailer < ApplicationMailer
-  default from: "lssebandek@gmail.com"
-  def welcome_email(user)
-    @user = user
-    
-    mail(to: @user.email,subject: 'Welcome to Online Auctioning System')
+  def signed_in(current_user)
+    @current_user = current_user
+
+    mail(
+    to:current_user.email,
+    subject: "Welcome to our site",
+
+    )
   end
 end

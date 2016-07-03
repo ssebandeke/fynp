@@ -1,0 +1,34 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+  highlight_cell = style.add_style(bg_color: "EFC376",border: Axlsx::STYLE_THIN_BORDER,alignment: { horizontal: :center },:format_code => '#.##')
+  date_cell = style.add_style(format_code: "yyyy-mm-dd", border: Axlsx::STYLE_THIN_BORDER,alignment: { horizontal: :center })
+  wb.add_worksheet(name: "Products") do |sheet|
+  sheet.add_row ['Title','Minimum Bid','End time']
+    @products.each do |product|
+      sheet.add_row [product.title, product.minimum_bid, product.end_time], style: [nil, highlight_cell, date_cell]
+
+  end
+
+
+
+
+  sheet.add_chart(Axlsx::Bar3DChart, start_at: "D10", end_at: "N#{(@products.length * 3).floor}") do |chart|
+  chart.add_series data: sheet["B2:B#{@products.length}"],
+                   labels: sheet["A2:A#{@products.length}"],
+                   title: "Products by price",
+                   colors: ["9033AA","45FF10","DDEEAA","ABCDE1","EFEDB5","AA76DD","BDFEBB","DAEDDE"]
+
+
+end
+
+
+  sheet.add_chart(Axlsx::Pie3DChart, start_at: "P1",end_at: "AD#{(@products.length * 1.5).floor}") do |piechart|
+  piechart.add_series data: sheet["B2:B#{@products.length}"],
+                      labels: sheet["A2:A#{@products.length}"],
+                      title: "products minimum bid",
+                      colors: ['00FFF2','AAD6CC','2345DD','3456AA','223344','A9EECC','6DD2AA','12BBEE','AAEE11','78AADE']
+
+  end
+  end
+
+end

@@ -1,5 +1,5 @@
 class BidMailer < ApplicationMailer
-  def product_created(user)
+  def products_created(user)
     mail(
     to: user.email,
     subject: "product created",

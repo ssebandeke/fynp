@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'stripe', git: 'https://github.com/stripe/stripe-ruby'
 gem 'wepay'
 gem 'braintree', '~> 2.33.1'
 gem 'figaro', '~> 0.7.0'

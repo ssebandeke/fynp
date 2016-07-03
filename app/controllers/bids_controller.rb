@@ -24,7 +24,7 @@ class BidsController < ApplicationController
     @bid.product = @product
     if not_user_own_the_product?
       if @bid.save
-        BidsMailer.bid_created(current_user,@product.seller,@bid.amount).deliver
+        ProductMailer.bid_created(current_user,@product.seller,@bid.amount).deliver
         redirect_to @product, :notice => "You are the current high bidder"
       else
         flash[:error] = @bid.errors.full_messages

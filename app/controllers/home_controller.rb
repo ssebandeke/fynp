@@ -19,4 +19,10 @@ class HomeController < ApplicationController
   def solo
 
   end
+  def reports
+
+  end
+  def terms
+
+  end
 end

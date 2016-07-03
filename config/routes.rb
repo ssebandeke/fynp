@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-
+  resources :charges
+  get 'category/index'
+  get 'home/reports'
   get 'home/about'
   get 'home/contact'
   get 'home/help'
@@ -8,7 +10,7 @@ Rails.application.routes.draw do
   get 'home/nassif'
   get 'home/ken'
   get 'home/solo'
-
+  get 'home/terms'
   get 'products/transaction'
   get 'products/comings'
   get 'bids/create'

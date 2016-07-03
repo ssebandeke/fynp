@@ -28,7 +28,7 @@ module Fynp
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-
+    # config.gem "activemerchant",:lib => "active_merchant",:version => "1.59.0"
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
     config.assets.paths << Rails.root.join("app","assets","fonts")
@@ -36,11 +36,11 @@ module Fynp
     ActionMailer::Base.smtp_settings = {
       address: "smtp.gmail.com",
       port: 587,
-      domain:"mail.google.com",
-      authentication: "login",
+      domain:"smtp.gmail.com",
+      authentication: :plain,
       enable_starttls_auto: true,
-      user_name: ENV["lssebandek@gmail.com"],
-      password:  ENV["jesus103."]
+      user_name: "lssebandek+1@gmail.com",
+      password:  "jesus103."
     }
   end
 end

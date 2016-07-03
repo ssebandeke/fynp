@@ -9,9 +9,21 @@ class ProductsController < ApplicationController
   end
   def comings
     @products = Product.get_coming_products
+    respond_to do |format|
+      format.html
+      format.xlsx{
+        response.headers['Content-Disposition'] = 'attachment; filename="coming_products.xlsx"'
+      }
+    end
   end
   def index
     @products = Product.get_active_products
+    respond_to do |format|
+      format.html
+      format.xlsx{
+        response.headers['Content-Disposition'] = 'attachment; filename="Active_products.xlsx"'
+      }
+    end
   end
 
   def new
@@ -23,7 +35,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     @product.seller = current_user
     if @product.save
-      BidMailer.product_created(@user).deliver
+      ProductMailer.product_created(@user).deliver
       redirect_to root_path
 
     else

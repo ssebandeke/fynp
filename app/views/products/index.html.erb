@@ -1,3 +1,213 @@
+
+        <div id="home-search-container">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <div class="widget pull-right">
+                            <div class="row">
+                            	<div class="span12 head-container">
+                            		<div class="row">
+                                  <div class="span8 hidden-phone">
+                                    <h2 class="head-title">Welcome to Online Auctionings</h2>
+                                    <p class="head-message"><strong>You can bid at any product here and it's instantly yours!.</strong><br />
+                                    Place a bid at any product you find here no descrimination..no waiting time..let's go...</p>
+
+                                    <%= link_to "New product",new_product_path,class:"btn btn-large btn-realto span3 header-cta" %>
+
+                                  </div>
+                                  <div class="span4" style="padding-bottom:150px">
+                                    <div class="search-form">
+                                      <p>Search products</p>
+                                      <%= form_tag search_products_path,method: :get do |f|%>
+                                        <%= text_field_tag :search,nil,placeholder: "Cars,Electronics,Appliances "%>
+                                        <%= select_tag :category,options_for_select(Category.all.map{ |c| [c.name,c.id]})%>
+                                        <%= submit_tag 'Search',class: "btn span2 btn-realto-form btn-large"%>
+                                      <%end%>
+                                    </div>
+
+                                  </div>
+
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+                  <div id="latest-properties">
+                    <div class="container">
+                      <div class="row">
+                        <div class="span12">
+                          <h2 class="secion-title">Active Products</h2>
+                        </div>
+                      </div>
+        		<!-- Begin Carousel -->
+            <div class="row">
+              <div id="realto-carousel" class="carousel slide span12">
+                <div class="carousel-navigation pull-right">
+                  <a class="serif italic pull-left view-all-carousel" href="#">View all</a>
+                  <a class="left carousel-control pull-left" href="#realto-carousel" data-slide="prev">‹</a>
+                  <a class="right carousel-control pull-right" href="#realto-carousel" data-slide="next">›</a>
+                </div>
+                <div class="carousel-inner">
+                  <div class="item active">
+                    <ul class="thumbnails">
+                      <% @products.last(3).each do |product| %>
+                      <li class="span4 box-container">
+                        <div class="holder">
+                          <a class="overlay" title="property title" href="#">
+                            <span class="more"></span>
+                            <%=link_to image_tag(product.image_url,class: 'media-object',alt: 'image'),product %>
+
+                          </a>
+                          <span class="prop-tag">For Sale</span>
+                          <div class="prop-info">
+                            <h3 class="prop-title"><%= link_to product.title,product%></h3>
+                            <ul class="more-info clearfix">
+                              <li class="info-label clearfix">
+                                <span class="pull-left">Category:</span>
+                                <span class="qty pull-right"><%=product.category.name%></span>
+                              </li>
+
+                              <li class="info-label clearfix">
+                                <span class="pull-left">bid counts:</span>
+                                <span class="qty pull-right"><%=product.bids_count%></span>
+                              </li>
+                            <%if product.highest_bid%>
+                              <li class="info-label clearfix"><span class="pull-left">Current highest bid</span> <span class="qty pull-right"><%=product.highest_bid%></span></li>
+                            <%else%>
+                            <li class="info-label clearfix"><span class="pull-left">Minimum bid</span> <span class="qty pull-right"><%=product.minimum_bid%></span></li>
+                            <%end%>
+                              <li class="info-label clearfix"><span class="pull-left">Bidding ends at:</span> <span class="qty pull-right"><%= product.end_time%></span></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </li>
+                      <%end%>
+                    </ul>
+                  </div>
+                  <div class="item">
+                    <ul class="thumbnails">
+                      <% @products.order(:id).reverse_order.limit(3).offset(3).each do |product|%>
+                      <li class="span4 box-container">
+                      <div class="holder">
+                          <a class="overlay" title="property title" href="#">
+                          <span class="more"></span>
+                          <%=link_to image_tag(product.image_url,class: 'media-object',alt: 'image'),product %>
+                          </a>
+                          <span class="prop-tag">For sale</span>
+                          <div class="prop-info">
+                            <h3 class="prop-title"><%= link_to product.title%></h3>
+                            <ul class="more-info clearfix">
+                              <%if product.highest_bid%>
+                                <li class="info-label clearfix"><span class="pull-left">Current highest bid</span> <span class="qty pull-right"><%=product.highest_bid%></span></li>
+                              <%else%>
+                              <li class="info-label clearfix"><span class="pull-left">Minimum bid</span> <span class="qty pull-right"><%=product.minimum_bid%></span></li>
+                              <%end%>
+                                <li class="info-label clearfix"><span class="pull-left">Bidding ends at:</span> <span class="qty pull-right"><%= product.end_time%></span></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </li>
+                      <%end%>
+                    </ul>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- #latest-properties  -->
+
+        <div class="container">
+            <div class="row">
+                <div class="span12 box-container">
+                    <div class="row adv-message clearfix">
+                        <div class="pull-left span7">
+                          <p class="upper-line serif italic">You can advertise with us at a relatively lower charge</p>
+                          <p class="lower-line">We are currently looking for businesses that need to advertise with us.<br/>
+                            If you are there plesase feel free to call our marketing department
+                          </p>
+                        </div>
+                        <!-- .pull-left -->
+                        <div class="phone-number pull-right"><i class="icon-phone"></i> Call Us: <strong>+256-701-706133</strong></div>
+
+                    </div>
+                    <!-- .adv-message  -->
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+                  <h2 class="secion-title">Meet our Board Members</h2>
+                  <div class="row">
+                    <div class="span2">
+                      <div class="home-agents widget">
+                        <a class="overlay" href="#" title="agent name">
+                          <span class="more"></span>
+                          <%=link_to image_tag("IMAG0169.jpg"),home_lawrence_path%>
+
+                        </a>
+                        <p class="home-agent-name">Ssebandeke Lawrence</p>
+                        <a class="serif italic" title="View profile page"><%= link_to "View profile",home_lawrence_path%>
+                           &raquo;</a>
+                      </div>
+
+                    </div>
+                    <div class="span2">
+                      <div class="home-agents widget">
+                        <a class="overlay" href="#" title="agent name">
+                          <span class="more"></span>
+                          <%=link_to image_tag("IMAG0168.jpg"),home_solo_path%>                </a>
+                        <p class="home-agent-name">Kewaza Solomon</p>
+                        <a class="serif italic" title="View profile page"><%= link_to "View profile",home_solo_path%>
+                           &raquo;</a>
+                      </div>
+
+                    </div>
+                    <div class="span2">
+                      <div class="home-agents widget">
+                        <a class="overlay" href="#" title="agent name">
+                          <span class="more"></span>
+                          <%=link_to image_tag("IMAG0167.jpg"),home_nassif_path%>
+                          </a>
+                        <p class="home-agent-name">Kyambadde Nassif</p>
+                        <a class="serif italic" title="View profile page"><%= link_to "View profile",home_nassif_path%>
+                           &raquo;</a>
+                      </div>
+
+                    </div>
+                    <div class="span2">
+                      <div class="home-agents widget">
+                        <a class="overlay" href="#" title="agent name">
+                          <span class="more"></span>
+                          <%=link_to image_tag("IMAG0166.jpg"),home_ken_path%>
+                        </a>
+                        <p class="home-agent-name">Serubiri Kenny</p>
+                        <a class="serif italic"  title="View profile page"><%= link_to "View Profile",home_ken_path%>
+                           &raquo;</a>
+                      </div>
+
+                    </div>
+                  </div>
+
+                <!-- .span4  -->
+            </div>
+        </div>
+      </div>
+<!--
 <div id="home-search-container">
   <div class="container">
     <div class="row">
@@ -23,21 +233,21 @@
                       <%= submit_tag 'Search',class: "btn span2 btn-realto-form btn-large"%>
                     <%end%>
                   </div>
-                  <!-- .search-form -->
+
                 </div>
-                <!-- .span4 -->
+
               </div>
             </div>
           </div>
-          <!-- .row -->
+
         </div>
-        <!-- .search-holder -->
+
       </div>
-      <!-- .span12 -->
+
     </div>
-    <!-- .row -->
+
   </div>
-  <!-- .container -->
+
 </div>
 <div id="latest-properties">
   <div class="container">
@@ -47,7 +257,7 @@
       </div>
     </div>
 
-    <!-- Begin Carousel -->
+
     <div class="row">
       <div id="realto-carousel" class="carousel slide span12">
         <div class="carousel-navigation pull-right">
@@ -64,7 +274,7 @@
                   <a class="overlay" title="property title" href="#">
                     <span class="more"></span>
                     <%=link_to image_tag(product.image_url,class: 'media-object',alt: 'image'),product %>
-                    <!-- <img alt="image" src="http://placehold.it/370x210" class="media-object"> -->
+
                   </a>
                   <span class="prop-tag">For Sale</span>
                   <div class="prop-info">
@@ -73,6 +283,11 @@
                       <li class="info-label clearfix">
                         <span class="pull-left">Category:</span>
                         <span class="qty pull-right"><%=product.category.name%></span>
+                      </li>
+
+                      <li class="info-label clearfix">
+                        <span class="pull-left">bid counts:</span>
+                        <span class="qty pull-right"><%=product.bids_count%></span>
                       </li>
                     <%if product.highest_bid%>
                       <li class="info-label clearfix"><span class="pull-left">Current highest bid</span> <span class="qty pull-right"><%=product.highest_bid%></span></li>
@@ -86,7 +301,7 @@
               </li>
               <%end%>
             </ul>
-          </div><!-- .item -->
+          </div>
           <div class="item">
             <ul class="thumbnails">
               <% @products.order(:id).reverse_order.limit(3).offset(3).each do |product|%>
@@ -113,17 +328,17 @@
               <%end%>
             </ul>
           </div>
-          <!-- .item-->
 
-        </div><!-- .carousel-inner -->
+
+        </div>
       </div>
-    </div><!--End Carousel-->
+    </div>
 
-  </div><!-- .container  -->
-</div><!-- #latest-properties  -->
+  </div>
+</div>
 
 
-<!-- #latest-properties  -->
+
 
 <div class="container">
   <div class="row">
@@ -134,12 +349,15 @@
           <p class="lower-line">We are currently looking for businesses that need to advertise with us.<br/>
             If you are there plesase feel free to call our marketing department
           </p>
+          <p>
+
+          </p>
         </div>
         <div class="span4">
-          <div class="phone-number pull-right"><i class="icon-phone"></i> Call Us: <strong>+256-701-706133</strong></div><!--/phone-number-->
+          <div class="phone-number pull-right"><i class="icon-phone"></i> Call Us: <strong>+256-701-706133</strong></div>
 
       </div>
-      <!-- .adv-message  -->
+
     </div>
   </div>
 </div>
@@ -153,13 +371,13 @@
             <a class="overlay" href="#" title="agent name">
               <span class="more"></span>
               <%=link_to image_tag("IMAG0169.jpg"),home_lawrence_path%>
-              <!-- <img alt="image" src="http://placehold.it/170x170" class="media-object"> -->
+
             </a>
             <p class="home-agent-name">Ssebandeke Lawrence</p>
             <a class="serif italic" title="View profile page"><%= link_to "View profile",home_lawrence_path%>
                &raquo;</a>
           </div>
-          <!-- .home-agents -->
+
         </div>
         <div class="span2">
           <div class="home-agents widget">
@@ -170,7 +388,7 @@
             <a class="serif italic" title="View profile page"><%= link_to "View profile",home_solo_path%>
                &raquo;</a>
           </div>
-          <!-- .home-agents -->
+
         </div>
         <div class="span2">
           <div class="home-agents widget">
@@ -182,7 +400,7 @@
             <a class="serif italic" title="View profile page">View profile
               page &raquo;</a>
           </div>
-          <!-- .home-agents -->
+
         </div>
         <div class="span2">
           <div class="home-agents widget">
@@ -194,11 +412,11 @@
             <a class="serif italic"  title="View profile page"><%= link_to "View Profile",home_ken_path%>
                &raquo;</a>
           </div>
-          <!-- .home-agents -->
+
         </div>
       </div>
     </div>
-    <!-- .span8  -->
+
     <div class="span4">
       <div class="home-blog-articles widget">
         <h2 class="secion-title">Our Partners</h2>
@@ -221,6 +439,6 @@
         </ul>
       </div>
     </div>
-    <!-- .span4  -->
+
   </div>
-</div>
+</div> -->

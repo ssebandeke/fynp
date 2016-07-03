@@ -22,7 +22,7 @@
 
               <%= f.label :date_of_birth %>
 
-              <%= f.date_select :date_of_birth,:start_year =>(Date.today.year-70) ,:end_year =>Date.today.year-10 ,:add_month_numbers => true %>
+              <%= f.date_select :date_of_birth,:start_year =>(Date.today.year-70) ,:end_year =>Date.today.year-16 ,:add_month_numbers => true %>
               <%= f.label :password %>
               <% if @minimum_password_length %>
               <em>(<%= @minimum_password_length %> characters minimum)</em>
@@ -31,6 +31,9 @@
 
               <%= f.label :password_confirmation %>
               <%= f.password_field :password_confirmation, autocomplete: "off" %>
+
+              <%= f.label :terms_and_conditions%>
+              <%= f.check_box :terms%>  By registering you accept our <%=link_to "terms and conditions ",home_terms_path%><br/>
 
               <%= f.submit "Sign up",class: "btn span2 btn-realto-form btn-large" %>
 

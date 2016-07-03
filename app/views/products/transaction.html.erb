@@ -6,24 +6,25 @@
     <div class="span12">
       <div class="box-container" style="height:auto;">
         <div style="margin-left: auto; margin-right: auto; width: 60em">
-          <h1 class="page-title",style="text-align: center;">These are the products you won</h1>
+          <h1 class="page-title",style="text-align: center;">your Cart</h1>
 
           <% @products.each do |product| %>
-            <%if current_user == product.highest_bidder%>
-            <div class="col-sm-6 col-md-4">
-              <div class="thumbnail">
-                <%= image_tag(product.image,class: 'media-object') %>
-                <!-- <a href="single.html"><%= image_tag(product.image_url, class: 'list_image') %></a> -->
-                <div class="caption">
-                  <h3><%= link_to product.title, product %></h3>
-                  <p><%= product.description %></p>
-                  <p><%= product.highest_bid %></p>
+              <%if current_user == product.highest_bidder%>
 
-                  <p><%= link_to 'checkout', new_order_path %></p>
-                </div>
-              </div>
-            </div>
-          <%end%>
+                          <div class="col-sm-6 col-md-4">
+                            <div class="thumbnail">
+                            <%= image_tag(product.image,class: 'media-object') %>
+                            <div class="caption">
+                              <h3><%= link_to product.title, product %></h3>
+                              <p><%= product.description %></p>
+                              <p><%= product.highest_bid %></p>
+                              <p><%= link_to 'checkout', new_order_path %></p>
+                              <p><%= link_to 'stripe', new_charge_path %></p>
+                            </div>
+                            </div>
+                          </div>
+              <%end%>
+
         <%end%>
           <%= link_to 'Back', products_path %>
         </div>
